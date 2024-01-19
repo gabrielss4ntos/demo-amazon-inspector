@@ -1,20 +1,41 @@
-# The Base Image for subsequent instructions.
-FROM node:14
+FROM debian:latest
 
-# App directory
-WORKDIR /app
+# Update
+RUN DEBIAN_FRONTEND=noninteractive apt-get update || true
 
-# Install app dependencies
-COPY package*.json ./
-
-# Install tools required for project
-RUN npm install
-
-# Copy the entire project 
-COPY . .
-
-# Listening Ports 
-EXPOSE 3000
-
-# RUN app node.js in /app1
-CMD [ "node", "index.js" ] 
+# Install build dependencies
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --fix-missing \
+    apt-utils \
+    autoconf \
+    automake \
+    bind9-host \
+    build-essential \
+    dh-autoreconf \
+    cpanminus \
+    curl \
+    devscripts \
+    exuberant-ctags \
+    git-core \
+    jq \
+    llvm \
+    libgeoip1 \
+    libgeoip-dev \
+    libpcre3 \
+    libpcre3-dbg \
+    libpcre3-dev \
+    libperl-dev \
+    libmagic-dev \
+    libtool \
+    lsof \
+    make \
+    mercurial \
+    ngrep \
+    procps \
+    python3 \
+    telnet \
+    tcpflow \
+    valgrind \
+    vim \
+    wget \
+    zlib1g \
+    zlib1g-dev
